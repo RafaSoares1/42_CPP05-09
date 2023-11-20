@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:49:08 by emsoares          #+#    #+#             */
-/*   Updated: 2023/11/16 18:32:28 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:50:19 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : _name("Default"), _grade(1)
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 {
   std::cout << " Bureaucrat default constructor called!" << std::endl;
 }
@@ -32,8 +32,11 @@ Bureaucrat &Bureaucrat::operator=(Bureaucrat const& obj)
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
-  //FALTA VERIFICAR SE GRADE 1-150
-  std::cout << " Bureaucrat constructor with arguments called!" << std::endl;
+  std::cout << "Bureaucrat constructor with arguments called!" << std::endl;
+  if (_grade < 1)
+    throw Bureaucrat::GradeTooHighException();
+  if (_grade > 150)
+    throw Bureaucrat::GradeTooLowException();
 }
 
 Bureaucrat::~Bureaucrat()
@@ -59,7 +62,7 @@ void  Bureaucrat::setGrade(int grade)
 void	Bureaucrat::incrementGrade()
 {
 	if (_grade - 1 < 1)
-    throw Bureaucrat::GradeTooHighException();
+    throw GradeTooHighException();
   else
     this->_grade -= 1;
 }
@@ -67,7 +70,7 @@ void	Bureaucrat::incrementGrade()
 void	Bureaucrat::decrementGrade()
 {
 	if (_grade + 1 > 150)
-    throw Bureaucrat::GradeTooLowException();
+    throw GradeTooLowException();
   else
     this->_grade += 1;
 }

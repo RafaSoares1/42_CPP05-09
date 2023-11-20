@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+         #
+#    By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 11:48:23 by emsoares          #+#    #+#              #
-#    Updated: 2023/11/16 11:48:36 by emsoares         ###   ########.fr        #
+#    Updated: 2023/11/20 15:14:24 by emsoares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PURPLE  = \033[1;35m
 CYAN    = \033[1;36m
 WHITE   = \033[1;37m
 
-NAME = ex00
+NAME = ex01
 
 CXX = c++
 
@@ -29,7 +29,8 @@ CXXFLAGS = -g -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 
 SRCS = main.cpp \
-	Animal.cpp \
+	Bureaucrat.cpp \
+	Form.cpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 
@@ -38,7 +39,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	clear
-	@echo "$(GREEN)./ex00 executable is ready!$(RESET)"
+	@echo "$(GREEN)./ex01 executable is ready!$(RESET)"
 
 clean:
 	@$(RM) $(OBJS)

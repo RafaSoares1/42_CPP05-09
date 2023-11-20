@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:48:52 by emsoares          #+#    #+#             */
-/*   Updated: 2023/11/16 18:31:58 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/11/20 14:55:20 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <iostream>
 #include <string>
-#include <exception>
 
 class Bureaucrat
 {
@@ -30,7 +29,7 @@ class Bureaucrat
 		Bureaucrat(std::string name, int grade);
 		const std::string getName();
 		int getGrade();
-		void setGrade(int grade);
+		void	setGrade(int grade);
 		void	incrementGrade();
 		void	decrementGrade();
 		class GradeTooHighException : public std::exception
