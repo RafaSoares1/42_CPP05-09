@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:15:01 by emsoares          #+#    #+#             */
-/*   Updated: 2023/11/21 11:44:46 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:40:54 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 	private:
 		const std::string _name;
@@ -25,16 +25,17 @@ class Form
 		const int _requiredGrade;
 		const int _gradeToExecute;
 	public:
-		Form();
-		Form(Form & src);
-		Form &operator=(Form const& obj);
-		~Form();
-		Form(std::string name, int required, int execute);
-		std::string getName();
-		bool getSigned();
+		AForm();
+		AForm(AForm & src);
+		AForm &operator=(AForm const& obj);
+		~AForm();
+		AForm(std::string name, int required, int execute);
+		std::string getName()const ;
+		bool getSigned() const;
 		int	getRequired();
-		int	getExecute();
+		int	getExecute() const;
 		void beSigned(Bureaucrat& bureaucrat);
+		virtual void execute(Bureaucrat const & executor) const = 0;
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -45,8 +46,13 @@ class Form
 			public:
 				virtual const char* what() const throw(){return "Form Exception: Grade too low!";};
 		};
+		class NotSignedException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw(){return "Form Exception: Form not signed!";};
+		};
 };
 
-std::ostream& operator<<(std::ostream& o, Form& obj);
+std::ostream& operator<<(std::ostream& o, AForm& obj);
 
 #endif

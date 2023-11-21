@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:14:50 by emsoares          #+#    #+#             */
-/*   Updated: 2023/11/20 18:38:05 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:14:05 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Form &Form::operator=(Form const& obj)
   return *this;
 }
 
-Form::Form(std::string name, int required, int execute) : _name(name), _requiredGrade(required), _gradeToExecute(execute), _signed(false)
+Form::Form(std::string name, int required, int execute) : _name(name), _signed(false), _requiredGrade(required), _gradeToExecute(execute)
 {
   std::cout << "Form constructor with arguments called!" << std::endl;
   if (_requiredGrade < 1 || _gradeToExecute < 1)
