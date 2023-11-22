@@ -18,21 +18,24 @@
 
 int main()
 {
+  AForm*form = NULL;
   try
   {
     Intern test1;
 
     Bureaucrat bureaucrat("rafa", 1);
-    AForm* form = test1.makeForm("shrubbery creation", "Target");
+    form = test1.makeForm("shrubbery creation", "Target");
     
     std::cout << *form << std::endl;
     form->beSigned(bureaucrat);
+    std::cout << *form << std::endl;
     bureaucrat.executeForm(*form);
     delete form;
   }
   catch(const std::exception& e)
   {
     std::cerr << e.what() << std::endl;
+    delete form;
   }
   
   return 0;

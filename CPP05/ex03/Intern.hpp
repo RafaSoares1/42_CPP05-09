@@ -23,7 +23,15 @@ class Intern
 		Intern(Intern & src);
 		Intern &operator=(Intern const& obj);
 		~Intern();
-		AForm *makeForm(std::string name, std::string target);
+		AForm *makeForm(const std::string name,const std::string target);
+		AForm* createRobotomy(const std::string target);
+		AForm* createPresidential(const std::string target);
+		AForm* createShrubbery(const std::string target);
+		class ErrorFormNameException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw(){return "Form name not recognized!";};
+		};
 };
 
 

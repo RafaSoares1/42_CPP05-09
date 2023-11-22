@@ -37,36 +37,37 @@ Intern::~Intern()
 	std::cout << "Intern destructor called!" << std::endl;
 }
 
-AForm *Intern::makeForm(std::string name, std::string target)
+AForm* Intern::createRobotomy(const std::string target)
 {
-	std::string strArray[] = {"robotomy request", "presidential pardon", "shrubbery creation"};
-	
-	int i;
-	for(i = 0; i < 3; i++)
+	std::cout << "Intern creates robotomy request!" << std::endl;
+	return new RobotomyRequestForm(target);
+}
+
+AForm* Intern::createPresidential(const std::string target)
+{
+	std::cout << "Intern creates presidential pardon!" << std::endl;
+	return new RobotomyRequestForm(target);
+}
+
+AForm* Intern::createShrubbery(const std::string target)
+{
+	std::cout << "Intern creates shrubbery creation!" << std::endl;
+	return new RobotomyRequestForm(target);
+}
+
+
+AForm *Intern::makeForm(const std::string name,const std::string target)
+{
+	const std::string strArray[] = {"robotomy request", "presidential pardon", "shrubbery creation"};
+	AForm* (Intern::*formCreator[])(const std::string ) = {&Intern::createRobotomy, &Intern::createPresidential, &Intern::createShrubbery}; // declares an array of function pointers.
+	//Each function in the array is expected to take a std::string parameter and return a pointer to an object of type AForm
+
+	for(int i = 0; i < 3; i++)
 	{
 		if (strArray[i] == name)
-			break;
+			return (this->*formCreator[i])(target);
 	}
-	switch (i)
-	{
-	case 0:
-	{
-		std::cout << "Intern creates " << name << std::endl;
-		return new RobotomyRequestForm(target);
-	}
-	case 1:
-	{
-		std::cout << "Intern creates " << name << std::endl;
-		return new PresidentialPardonForm(target);
-	}
-	case 2:
-	{
-		std::cout << "Intern creates " << name << std::endl;
-		return new ShrubberyCreationForm(target);
-	}
-	default:
-		break;
-	}
-	std::cout << "Intern couldnt create anything !!!" << std::endl;
-	return NULL;
+
+	throw ErrorFormNameException();
+  return NULL;//security reasons!!
 }

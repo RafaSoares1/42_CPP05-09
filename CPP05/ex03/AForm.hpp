@@ -28,7 +28,7 @@ class AForm
 		AForm();
 		AForm(AForm & src);
 		AForm &operator=(AForm const& obj);
-		~AForm();
+		virtual ~AForm();
 		AForm(std::string name, int required, int execute);
 		std::string getName()const ;
 		bool getSigned() const;
