@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:47:33 by emsoares          #+#    #+#             */
-/*   Updated: 2023/11/22 17:23:53 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:14:06 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ AForm* Intern::createRobotomy(const std::string target)
 AForm* Intern::createPresidential(const std::string target)
 {
 	std::cout << "Intern creates presidential pardon!" << std::endl;
-	return new RobotomyRequestForm(target);
+	return new PresidentialPardonForm(target);
 }
 
 AForm* Intern::createShrubbery(const std::string target)
 {
 	std::cout << "Intern creates shrubbery creation!" << std::endl;
-	return new RobotomyRequestForm(target);
+	return new ShrubberyCreationForm(target);
 }
 
 
