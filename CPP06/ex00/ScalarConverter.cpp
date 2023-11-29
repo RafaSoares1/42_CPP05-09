@@ -62,6 +62,38 @@ bool ScalarConverter::isInt(const std::string& literal)
 	return true;	
 }
 
+bool ScalarConverter::isFloat(const std::string& literal)
+{
+	if(literal[literal.length() - 1] != 'f')
+		return false;
+	if(literal.find_first_of('.') != literal.find_last_of('.'))
+		return false;
+
+	for(size_t i = 0; i < literal.length() - 1; i++)
+	{
+		if (i == 0 && literal[i] == '-')
+			continue;
+		if(literal[i] == '.')
+			continue;
+		if(!isdigit(literal[i]))
+			return false;
+	}
+	std::string copy = literal;
+
+	copy.erase(copy.length() - 1);
+	std::istringstream iss(copy); // creating an istringstream object named iss.
+	//The purpose of istringstream is to treat a string (copy in this case) as if it were a stream (like cin or a file).
+	//iss is now a stream that you can use to read from the string
+	float myFloat;
+
+	if(iss >> myFloat)//checking whether it's possible to extract a floating-point number from the stream (iss) and store it in the variable myFloat
+	{
+		if (myFloat < std::numeric_limits<float>::min() || myFloat > std::numeric_limits<float>::max())
+			return false;
+	return true;
+	}
+	return false;
+}
 //printType
 
 void	ScalarConverter::printChar(char c)
@@ -86,6 +118,25 @@ void	ScalarConverter::printInt(int n)
 	std::cout << "double: " << static_cast<float>(n) << ".0" << std::endl;
 }
 
+void ScalarConverter::printFloat(const std::string& literal)
+{
+	std::string copy = literal;
+
+	copy.erase(copy.length() - 1);
+	std::istringstream iss(copy);
+	float myFloat;
+	if(iss >> myFloat)
+	{
+		if(ftIsPrintable(static_cast<int>(myFloat)))
+			std::cout << "char: " << static_cast<char>(myFloat) << std::endl;
+		else
+			std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: " << static_cast<int>(myFloat) << std::endl;
+		std::cout << "float: " << myFloat << "f" << std::endl;
+		std::cout << "double: " << myFloat << std::endl;
+	}
+
+}
 //Scalar Converter
 void ScalarConverter::convert(const std::string& literal)
 {
@@ -94,7 +145,12 @@ void ScalarConverter::convert(const std::string& literal)
 		printChar(literal[0]);
 	else if(isInt(literal))
 		printInt(atoi(literal.c_str()));
-	else
+	else if(isFloat(literal))
+		printFloat(literal);
+/* 	else if(isDouble(literal))
+		printDouble(literal); */
+	/* else if( isSpecial)
+		printSpecial(litreal); */
 		std::cout << "Error !!!!" << std::endl;
 }
 

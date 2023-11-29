@@ -31,8 +31,10 @@ class ScalarConverter
     static void convert(const std::string& literal);
 		static bool	isChar(const std::string& literal);
 		static bool isInt(const std::string& literal);
+		static bool isFloat(const std::string& literal);
 		static void	printChar(char c);
 		static void printInt(int n);
+		static void printFloat(const std::string& literal);
 		static bool ftIsPrintable(int c);
 };
 
