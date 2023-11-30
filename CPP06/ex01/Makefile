@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/25 10:32:00 by emsoares          #+#    #+#              #
-#    Updated: 2023/11/30 21:34:19 by emsoares         ###   ########.fr        #
+#    Created: 2023/11/30 21:32:17 by rafael            #+#    #+#              #
+#    Updated: 2023/11/30 21:34:52 by emsoares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PURPLE  = \033[1;35m
 CYAN    = \033[1;36m
 WHITE   = \033[1;37m
 
-NAME = ex00
+NAME = ex01
 
 CXX = c++
 
@@ -39,7 +39,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	clear
-	@echo "$(GREEN)./ex00 executable is ready!$(RESET)"
+	@echo "$(GREEN)./ex01 executable is ready!$(RESET)"
 
 clean:
 	@$(RM) $(OBJS)

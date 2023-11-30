@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 10:36:09 by emsoares          #+#    #+#             */
-/*   Updated: 2023/11/27 17:17:02 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/11/30 21:34:12 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
