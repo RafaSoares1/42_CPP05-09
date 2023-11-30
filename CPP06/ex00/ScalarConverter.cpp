@@ -88,12 +88,50 @@ bool ScalarConverter::isFloat(const std::string& literal)
 
 	if(iss >> myFloat)//checking whether it's possible to extract a floating-point number from the stream (iss) and store it in the variable myFloat
 	{
-		if (myFloat < std::numeric_limits<float>::min() || myFloat > std::numeric_limits<float>::max())
+		if (myFloat < -FLT_MAX || myFloat > FLT_MAX)
 			return false;
 	return true;
 	}
 	return false;
 }
+
+bool ScalarConverter::isDouble(const std::string& literal)
+{
+	if(literal.find_first_of('.') != literal.find_last_of('.'))
+		return false;
+
+	for(size_t i = 0; i < literal.length() - 1; i++)
+	{
+		if (i == 0 && literal[i] == '-')
+			continue;
+		if(literal[i] == '.')
+			continue;
+		if(!isdigit(literal[i]))
+			return false;
+	}
+	std::string copy = literal;
+
+	std::istringstream iss(copy); // creating an istringstream object named iss.
+	//The purpose of istringstream is to treat a string (copy in this case) as if it were a stream (like cin or a file).
+	//iss is now a stream that you can use to read from the string
+	double myDouble;
+
+	if(iss >> myDouble)//checking whether it's possible to extract a floating-point number from the stream (iss) and store it in the variable myDouble
+	{
+		if (myDouble < -DBL_MAX || myDouble > DBL_MAX )
+			return false;
+	return true;
+	}
+	return false;
+}
+
+bool ScalarConverter::isSpecial(const std::string& literal)
+{
+	if (literal == "nan" || literal == "-inf" || literal == "+inf" || literal == "nanf" || literal == "-inff" || literal == "+inff")
+		return (true);
+	return (false);
+}
+
 //printType
 
 void	ScalarConverter::printChar(char c)
@@ -135,7 +173,42 @@ void ScalarConverter::printFloat(const std::string& literal)
 		std::cout << "float: " << myFloat << "f" << std::endl;
 		std::cout << "double: " << myFloat << std::endl;
 	}
+}
 
+void ScalarConverter::printDouble(const std::string& literal)
+{
+	std::string copy = literal;
+
+	std::istringstream iss(copy);
+	double myDouble;
+	if(iss >> myDouble)
+	{
+		if(ftIsPrintable(static_cast<int>(myDouble)))
+			std::cout << "char: " << static_cast<char>(myDouble) << std::endl;
+		else
+			std::cout << "char: Non displayable" << std::endl;
+		std::cout << "int: " << static_cast<int>(myDouble) << std::endl;
+		std::cout << "float: " << myDouble << "f" << std::endl;
+		std::cout << "double: " << myDouble << std::endl;
+	}
+}
+
+void ScalarConverter::printSpecial(const std::string& literal)
+{
+	std::cout << "char : impossible" << std::endl;
+	std::cout << "int : impossible" << std::endl;
+	if(literal == "-inff" || literal == "+inff" || literal == "nanf")
+		std::cout << "float : " << literal << std::endl;
+	else
+		std::cout << "float : " << literal << "f" << std::endl;
+	if (literal == "-inf" || literal == "+inf" || literal == "nan")
+		std::cout << "double : " << literal << std::endl;
+	else
+	{
+		std::string copy = literal;
+		copy.erase(copy.length() - 1);
+		std::cout << "double : " << copy << std::endl;
+	}
 }
 //Scalar Converter
 void ScalarConverter::convert(const std::string& literal)
@@ -147,10 +220,11 @@ void ScalarConverter::convert(const std::string& literal)
 		printInt(atoi(literal.c_str()));
 	else if(isFloat(literal))
 		printFloat(literal);
-/* 	else if(isDouble(literal))
-		printDouble(literal); */
-	/* else if( isSpecial)
-		printSpecial(litreal); */
+	else if(isDouble(literal))
+		printDouble(literal);
+	else if(isSpecial(literal))
+		printSpecial(literal);
+	else
 		std::cout << "Error !!!!" << std::endl;
 }
 

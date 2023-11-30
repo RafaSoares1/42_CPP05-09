@@ -18,6 +18,7 @@
 #include <sstream>
 #include <limits>
 #include <stdlib.h>
+#include <cfloat>
 
 class ScalarConverter
 {
@@ -32,9 +33,13 @@ class ScalarConverter
 		static bool	isChar(const std::string& literal);
 		static bool isInt(const std::string& literal);
 		static bool isFloat(const std::string& literal);
+		static bool isDouble(const std::string& literal);
+		static bool isSpecial(const std::string& literal);
 		static void	printChar(char c);
 		static void printInt(int n);
 		static void printFloat(const std::string& literal);
+		static void printDouble(const std::string& literal);
+		static void printSpecial(const std::string& literal);
 		static bool ftIsPrintable(int c);
 };
 
