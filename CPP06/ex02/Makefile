@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emsoares <emsoares@student.42.fr>          +#+  +:+       +#+         #
+#    By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/01 10:05:25 by emsoares          #+#    #+#              #
-#    Updated: 2023/12/01 10:05:28 by emsoares         ###   ########.fr        #
+#    Created: 2023/12/01 11:30:22 by emsoares          #+#    #+#              #
+#    Updated: 2023/12/01 12:06:16 by emsoares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PURPLE  = \033[1;35m
 CYAN    = \033[1;36m
 WHITE   = \033[1;37m
 
-NAME = ex01
+NAME = ex02
 
 CXX = c++
 
@@ -29,7 +29,7 @@ CXXFLAGS = -g -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 
 SRCS = main.cpp \
-			Serializer.cpp \
+			Base.cpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 
@@ -38,7 +38,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	clear
-	@echo "$(GREEN)./ex01 executable is ready!$(RESET)"
+	@echo "$(GREEN)./ex02 executable is ready!$(RESET)"
 
 clean:
 	@$(RM) $(OBJS)

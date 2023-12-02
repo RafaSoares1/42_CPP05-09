@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:04:49 by emsoares          #+#    #+#             */
-/*   Updated: 2023/11/30 21:34:06 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/02 11:54:45 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool ScalarConverter::isFloat(const std::string& literal)
 {
 	if(literal[literal.length() - 1] != 'f')
 		return false;
-	if(literal.find_first_of('.') != literal.find_last_of('.'))
+	if(literal.find_first_of('.') != literal.find_last_of('.') || literal.find('.') == std::string::npos)
 		return false;
 
 	for(size_t i = 0; i < literal.length() - 1; i++)
@@ -84,12 +84,12 @@ bool ScalarConverter::isFloat(const std::string& literal)
 	std::istringstream iss(copy); // creating an istringstream object named iss.
 	//The purpose of istringstream is to treat a string (copy in this case) as if it were a stream (like cin or a file).
 	//iss is now a stream that you can use to read from the string
-	float myFloat;
+	double myFloat;
 
 	if(iss >> myFloat)//checking whether it's possible to extract a floating-point number from the stream (iss) and store it in the variable myFloat
 	{
-		if (myFloat < -FLT_MAX || myFloat > FLT_MAX)
-			return false;
+		if(myFloat < -std::numeric_limits<float>::min() || myFloat > std::numeric_limits<float>::max())
+		return(false);
 	return true;
 	}
 	return false;
@@ -97,10 +97,9 @@ bool ScalarConverter::isFloat(const std::string& literal)
 
 bool ScalarConverter::isDouble(const std::string& literal)
 {
-	if(literal.find_first_of('.') != literal.find_last_of('.'))
+	if(literal.find_first_of('.') != literal.find_last_of('.') || literal.find('.') == std::string::npos)
 		return false;
-
-	for(size_t i = 0; i < literal.length() - 1; i++)
+	for(size_t i = 0; i < literal.length(); i++)
 	{
 		if (i == 0 && literal[i] == '-')
 			continue;
@@ -114,12 +113,12 @@ bool ScalarConverter::isDouble(const std::string& literal)
 	std::istringstream iss(copy); // creating an istringstream object named iss.
 	//The purpose of istringstream is to treat a string (copy in this case) as if it were a stream (like cin or a file).
 	//iss is now a stream that you can use to read from the string
-	double myDouble;
+	long double myDouble;
 
 	if(iss >> myDouble)//checking whether it's possible to extract a floating-point number from the stream (iss) and store it in the variable myDouble
 	{
-		if (myDouble < -DBL_MAX || myDouble > DBL_MAX )
-			return false;
+		if(myDouble < -std::numeric_limits<double>::max() || myDouble > std::numeric_limits<double>::max())
+		return(false);
 	return true;
 	}
 	return false;
@@ -162,7 +161,7 @@ void ScalarConverter::printFloat(const std::string& literal)
 
 	copy.erase(copy.length() - 1);
 	std::istringstream iss(copy);
-	float myFloat;
+	double myFloat;
 	if(iss >> myFloat)
 	{
 		if(ftIsPrintable(static_cast<int>(myFloat)))
@@ -170,8 +169,16 @@ void ScalarConverter::printFloat(const std::string& literal)
 		else
 			std::cout << "char: Non displayable" << std::endl;
 		std::cout << "int: " << static_cast<int>(myFloat) << std::endl;
-		std::cout << "float: " << myFloat << "f" << std::endl;
-		std::cout << "double: " << myFloat << std::endl;
+		if (myFloat - static_cast<int>(myFloat) == 0)
+		{
+			std::cout << "float: " << myFloat << ".0f" << std::endl;
+			std::cout << "double: " << myFloat << ".0" << std::endl;	
+		}
+		else
+		{
+			std::cout << "float: " << myFloat << "f" << std::endl;
+			std::cout << "double: " << myFloat << std::endl;
+		}
 	}
 }
 
@@ -188,8 +195,16 @@ void ScalarConverter::printDouble(const std::string& literal)
 		else
 			std::cout << "char: Non displayable" << std::endl;
 		std::cout << "int: " << static_cast<int>(myDouble) << std::endl;
-		std::cout << "float: " << myDouble << "f" << std::endl;
-		std::cout << "double: " << myDouble << std::endl;
+		if (myDouble - static_cast<int>(myDouble) == 0)
+		{
+			std::cout << "float: " << myDouble << ".0f" << std::endl;
+			std::cout << "double: " << myDouble << ".0" << std::endl;	
+		}
+		else
+		{
+			std::cout << "float: " << myDouble << "f" << std::endl;
+			std::cout << "double: " << myDouble << std::endl;
+		}
 	}
 }
 
