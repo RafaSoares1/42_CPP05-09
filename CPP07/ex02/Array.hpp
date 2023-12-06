@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:33:56 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/05 16:32:05 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/06 11:12:24 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Array
 	public:
 		Array();
 		Array(unsigned int n);
-		Array(Array & src);
+		Array(Array & obj);
 		Array &operator=(Array const& obj);
 		~Array();
 
@@ -39,5 +39,7 @@ class Array
 				virtual const char *what() const throw(){return "Exception: Index Out Of Bounds";}
 		};
 };
+
+#include "Array.tpp"
 
 #endif

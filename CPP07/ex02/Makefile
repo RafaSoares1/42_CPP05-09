@@ -6,7 +6,7 @@
 #    By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/05 14:34:06 by emsoares          #+#    #+#              #
-#    Updated: 2023/12/05 14:35:13 by emsoares         ###   ########.fr        #
+#    Updated: 2023/12/06 11:14:32 by emsoares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,6 @@ CXXFLAGS = -g -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 
 SRCS = main.cpp \
-			Array.tpp \
-
 
 OBJS = $(SRCS:%.cpp=%.o)
 
