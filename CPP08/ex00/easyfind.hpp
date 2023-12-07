@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 21:06:25 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/06 22:43:47 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/07 15:00:31 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
 
 class NotFoundException : public std::exception
 {

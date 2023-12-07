@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 21:02:57 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/06 22:51:08 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/07 15:12:39 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int main()
 
 	try
 	{
+		std::cout << "----- Vector test -----\n" << std::endl;
+
 		std::vector<int> container;
 		
 		container.push_back(18);
@@ -34,11 +36,44 @@ int main()
 		}
 		std::cout << "\n" << std::endl;
 
-		easyfind(container, 1);
+		easyfind(container, 3);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
+
+	try
+	{
+		std::cout << "\n----- List test -----\n" << std::endl;
+
+		std::list<int> container2;
+		
+		container2.push_back(23);
+		container2.push_back(31);
+		container2.push_back(722);
+		container2.push_back(639);
+		container2.push_back(123);
+		
+		// Move the iterator to the desired position using std::advance
+		std::list<int>::iterator it = container2.begin();
+    std::advance(it, 2); // Move 2 positions forward
+
+    container2.insert(it, 87);// Insert new int at the 3rd position
+			
+		std::cout << "List elements: ";
+		for (std::list<int>::iterator it = container2.begin(); it != container2.end(); ++it) 
+		{
+			std::cout << *it << " ";
+		}
+		std::cout << "\n" << std::endl;
+
+		easyfind(container2, 23);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 	
 }
