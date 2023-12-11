@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:06:58 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/08 15:16:36 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:22:30 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
+#include <cstdlib>
+#include <ctime>
 
 class Span
 {
@@ -34,6 +36,7 @@ class Span
 		int shortestSpan();
 		int longestSpan();
 		void printVec();
+		void fillContainer();
 
 	class SpanFullException : public std::exception
 		{
@@ -47,5 +50,6 @@ class Span
 				virtual const char *what() const throw(){return "Exception: Not enough numbers to find a span!";}
 		};
 };
+int getRandom();
 
 #endif

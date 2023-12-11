@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:06:51 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/08 17:16:03 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:23:56 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,13 @@ int Span::longestSpan()
 
 }
 
+int getRandom()
+{
+  return std::rand() % 100000;
+}
+
+void Span::fillContainer()
+{
+	vec.resize(this->_n);
+	std::generate(this->vec.begin(), this->vec.end(), getRandom);
+}

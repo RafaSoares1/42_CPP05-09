@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:07:05 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/08 17:06:20 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:25:57 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,20 @@ int main()
 		std::cerr << e.what() << std::endl;
 	}
 	
+
+	try
+	{
+		std::cout << "\n\nAUTO VECTOR!\n" << std::endl;
+		Span autoVec(10000);
+		
+		autoVec.fillContainer();
+
+		autoVec.printVec();
+		std::cout  << autoVec.shortestSpan() << " is the Shortest Span.\n" <<std::endl;
+		std::cout  << autoVec.longestSpan() << " is the Longest Span." <<std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
