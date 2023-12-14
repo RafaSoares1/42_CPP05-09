@@ -6,7 +6,7 @@
 #    By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 19:43:31 by emsoares          #+#    #+#              #
-#    Updated: 2023/12/12 19:45:35 by emsoares         ###   ########.fr        #
+#    Updated: 2023/12/14 16:26:01 by emsoares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ CXXFLAGS = -g -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 
 SRCS = main.cpp \
+			BitcoinExchange.cpp \
 
 
 OBJS = $(SRCS:%.cpp=%.o)
