@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:45:06 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/14 17:57:26 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/18 17:25:18 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,7 @@ void	BitcoinExchange::printMap(void)
 {
   std::map<std::string, float>::iterator it;
     for (it = btcMap.begin(); it != btcMap.end(); ++it)
-    {
-        std::cout.setf(std::ios_base::fixed, std::ios_base::floatfield); // Set fixed-point notation
-        std::cout << "Date: " << it->first << ", Bitcoin Value: "
-                  << std::setprecision(2) << it->second << std::endl;
-        std::cout.unsetf(std::ios_base::floatfield); // Unset fixed-point notation
-    }
+        std::cout << it->first << "," << std::setprecision(7) << it->second << std::endl;
 }
 
 //DataBase to std::map container
@@ -70,10 +65,7 @@ void BitcoinExchange::readCSV(void) //place this function inside another one!
 {
 	std::ifstream inputFile("data.csv"); // Open the CSV file
 	if (!inputFile.is_open()) // Check if the file is opened successfully
-	{
-    std::cout << "Error: Can't open data.csv file." << std::endl;
-    exit(0);
-  }
+   throw CantOpenFileException();
 	
 	std::string line; // Read each line from the file
 	std::getline(inputFile, line); //jump the first line of the .csv file (date|exchange_rate)
@@ -92,5 +84,40 @@ void BitcoinExchange::readCSV(void) //place this function inside another one!
 	
 	inputFile.close();
 	
-	printMap();
+	//printMap();
+	validationInput();
+
+}
+
+void	BitcoinExchange::validationInput(void)
+{
+	std::ifstream inputFile(this->_file.c_str());
+	if(!inputFile.is_open())
+		throw CantOpenFileException();
+	if (inputFile.eof())
+		return ;
+	std::string line; // Read each line from the file
+	std::getline(inputFile, line);
+	if(line != "date | value")
+		throw FormatException();
+	while(std::getline(inputFile, line))
+	{
+		checkLine(line);
+	}
+}
+
+void BitcoinExchange::checkLine(std::string& line)
+{
+	//std::cout << "Checking line: " << line << std::endl;
+	//Check Pipes:
+	int pipeCount = 0;
+	for (std::size_t i = 0; i < line.length(); ++i)
+		if (line[i] == '|')
+			pipeCount++;
+	if (pipeCount != 1)
+	{
+		std::cout << "Error: bad input => " << line << std::endl;
+		return ;
+	}
+	std::cout << "Pipe ok!" << std::endl;
 }

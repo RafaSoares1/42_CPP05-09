@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:45:01 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/14 17:52:34 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/18 17:14:52 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ class BitcoinExchange
 		std::string getFileName(void);
 		void	printMap(void);
 		void	readCSV(void);
+		void	validationInput(void);
+		void	checkLine(std::string& line);
+
+		class CantOpenFileException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw(){return "Exception: Can't open file!";}
+		};
+		class FormatException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw(){return "Exception: Incorrect format at the beginning of the file!";}
+		};
 };
 
 
