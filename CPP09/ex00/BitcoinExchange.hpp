@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:45:01 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/19 18:11:01 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:43:27 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ class BitcoinExchange
 		bool	checkMonth(std::string& month);
 		bool	checkDay(std::string& year, std::string& month, std::string& day);
 		bool	checkValue(std::string& line, std::string& date);
-		void	calculateBTC(std::string& date, int value);
+		void	calculateBTC(std::string& date, std::string& value);
 		class CantOpenFileException : public std::exception
 		{
 			public:

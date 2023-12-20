@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:45:06 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/19 18:11:52 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:28:08 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 BitcoinExchange::BitcoinExchange() : _file("Default")
 {
 	readCSV();
+	validationInput();
 }
-
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& obj)
 {
@@ -36,6 +36,7 @@ BitcoinExchange::~BitcoinExchange(){}
 BitcoinExchange::BitcoinExchange(std::string file) : _file(file)
 {
 	readCSV();
+	validationInput();
 }
 
 //Get and set functions
@@ -49,7 +50,6 @@ std::string BitcoinExchange::getFileName(void)
 {
 	return (_file);
 }
-
 
 // aux member functions
 void	BitcoinExchange::printMap(void)
@@ -99,10 +99,6 @@ void BitcoinExchange::readCSV(void) //place this function inside another one!
 	}
 	
 	inputFile.close();
-	
-	//printMap();
-	validationInput();
-
 }
 
 void	BitcoinExchange::validationInput(void)
@@ -252,26 +248,60 @@ bool	BitcoinExchange::checkValue(std::string& line, std::string& date)
 		std::cout << "Error(5): bad input => " << line << std::endl;
 		return false;
 	}
-	long numValue = atol(value.c_str());
-	if (numValue < 0)
+	float numValue = atof(value.c_str());
+	if (numValue < 0.0)
 	{
 		std::cout << "Error: not a positive number." << std::endl;
 		return false;
 	}
-	if (numValue > 1000)
+	if (numValue > 1000.0)
 	{
 		std::cout << "Error: too large a number." << std::endl;
 		return false;
 	}
-	std::cout << line << "  VALUE IS: " << value << "|" << std::endl;
-	calculateBTC(date, static_cast<int>(numValue));
+	int dotCount = 0;
+	for (size_t i = 0; i < value.length(); i++)
+	{
+		if (!isdigit(value[i]) && value[i] != '.')
+		{
+			std::cout << "Error(6): bad input => " << line << std::endl;
+			return false;
+		}
+		if(value[i] == '.')
+			dotCount++;
+	}
+	if (dotCount > 1 || !isdigit(value[0]))
+	{
+		std::cout << "Error(7): bad input => " << line << std::endl;
+		return false;
+	}
+	size_t dotPos = value.find('.');
+	if(dotPos != std::string::npos && !isdigit(value[dotPos + 1]))
+	{
+		std::cout << "Error(8): bad input => " << line << std::endl;
+		return false;
+	}
+	
+	calculateBTC(date, value);
 	return true;
 }
 
-
 //--CALCULATE BTC
 
-void	BitcoinExchange::calculateBTC(std::string& date, int value)
+void	BitcoinExchange::calculateBTC(std::string& date, std::string& value)
 {
+	float valueMult;
 	
+	std::map<std::string, float>::iterator it;
+  for (it = btcMap.begin(); it != btcMap.end(); ++it)
+	{
+		if (date < it->first)
+		{
+			--it;
+			valueMult = it->second;
+			break;
+		}
+	}
+	float finalValue = atof(value.c_str()) * valueMult;
+	std::cout << date << " => " << value << " = " << finalValue << std::endl;
 }
