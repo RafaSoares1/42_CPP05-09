@@ -6,7 +6,7 @@
 #    By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/20 14:30:30 by emsoares          #+#    #+#              #
-#    Updated: 2023/12/20 17:04:23 by emsoares         ###   ########.fr        #
+#    Updated: 2023/12/21 17:38:34 by emsoares         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,7 @@ CXXFLAGS = -g -Wall -Wextra -Werror -std=c++98
 RM = rm -rf
 
 SRCS = main.cpp \
-				RPN.cpp \
-
+		RPN.cpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 
@@ -38,7 +37,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	clear
-	@echo "$(GREEN)./btc executable is ready!$(RESET)"
+	@echo "$(GREEN)./RPN executable is ready!$(RESET)"
 
 clean:
 	@$(RM) $(OBJS)
