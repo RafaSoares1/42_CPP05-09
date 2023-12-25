@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RPN.HPP                                            :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:33:00 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/21 17:36:33 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/25 12:29:30 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,14 @@ class RPN
     ~RPN();
 		void	setExpression(std::string expression);
 		std::string	getExpression(void);
+		bool isValidExpression();
 		void	executeRPN(void);
 	
-
+		class WrongExpressionException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw(){return "Exception: Incorrect expression!\nPlease try again!";}
+		};
 };
 
 #endif
