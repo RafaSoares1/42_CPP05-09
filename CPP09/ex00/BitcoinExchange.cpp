@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 19:45:06 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/20 17:38:38 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/27 18:14:36 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,11 @@ void	BitcoinExchange::calculateBTC(std::string& date, std::string& value)
 			valueMult = it->second;
 			break;
 		}
+	}
+	if(it == btcMap.end())
+	{
+		--it;
+		valueMult = it->second;
 	}
 	float finalValue = atof(value.c_str()) * valueMult;
 	std::cout << date << " => " << value << " = " << finalValue << std::endl;
