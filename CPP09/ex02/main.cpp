@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 11:51:07 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/26 15:02:52 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/27 18:51:45 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int ac, char **av)
 	for(int i = 1; i < ac ; i++)
 	{
 		if (isDigit(av[i]) == false)
-			return(std::cout << "\033[1;31mERROR: Input arguments must contain only number!\033[0m" << std::endl, 1);
+			return(std::cout << "\033[1;31mERROR: Input arguments must contain only positive numbers!\033[0m" << std::endl, 1);
 	}
 
 	std::vector<int> temp;
