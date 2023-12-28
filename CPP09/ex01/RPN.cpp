@@ -6,7 +6,7 @@
 /*   By: emsoares <emsoares@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:32:52 by emsoares          #+#    #+#             */
-/*   Updated: 2023/12/25 13:46:03 by emsoares         ###   ########.fr       */
+/*   Updated: 2023/12/28 12:35:26 by emsoares         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,15 @@ void RPN::executeRPN(void)
 			_stack.push(std::atof(index.c_str()));
 		else
 		{
+			if(_stack.empty())
+				throw WrongExpressionException();
 			double value2 = _stack.top();
       _stack.pop();
+			if(_stack.empty())
+				throw WrongExpressionException();
       double value1 = _stack.top();
 	    _stack.pop();
+	
 			
 			if(index == "+")
 				_stack.push(value1 + value2);
